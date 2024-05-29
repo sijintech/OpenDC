@@ -1,0 +1,142 @@
+{
+    "version": 2,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 20,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "linux-Debug",
+            "displayName": "Linux x64 intel Debug",
+            "description": "Sets Ninja, intel compilers, x64 architecture, debug build, build/install directory",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/out/build/debug",
+            "architecture": {
+                "value": "x64",
+                "strategy": "external"
+            },
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "BUILD_TEST": "ON",
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/debug",
+                "CMAKE_C_COMPILER": "icx",
+                "CMAKE_CXX_COMPILER": "icpx",
+                "CMAKE_Fortran_COMPILER": "ifort",
+                "CMAKE_DEBUG_POSTFIX": "d",
+                "CPACK_GENERATOR": "TXZ"
+            },
+            "vendor": {
+                "microsoft.com/VisualStudioSettings/CMake/1.0": {
+                    "hostOS": [
+                        "Linux"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "windows-Release",
+            "inherits": "windows-Debug",
+            "displayName": "Windows x64 intel Release",
+            "binaryDir": "${sourceDir}/out/build/release",
+            "description": "Sets Ninja, intel compilers, x64 architecture, release build, build/install directory",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/release",
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "windows-Debug",
+            "inherits": "linux-Debug",
+            "displayName": "Windows x64 intel Debug",
+            "description": "Sets Ninja, intel compilers, x64 architecture, debug build, build/install directory",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "icl",
+                "CMAKE_CXX_COMPILER": "icl",
+                "CMAKE_Fortran_COMPILER": "ifort"
+            },
+            "vendor": {
+                "microsoft.com/VisualStudioSettings/CMake/1.0": {
+                    "hostOS": [
+                        "Windows"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "linux-Release",
+            "inherits": "linux-Debug",
+            "displayName": "Linux x64 intel Release",
+            "description": "Sets Ninja, intel compilers, x64 architecture, release build, build/install directory",
+            "binaryDir": "${sourceDir}/out/build/release",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/release",
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "linux-Debug",
+            "configurePreset": "linux-Debug"
+        },
+        {
+            "name": "windows-Debug",
+            "configurePreset": "windows-Debug"
+        },
+        {
+            "name": "linux-Release",
+            "configurePreset": "linux-Release"
+        },
+        {
+            "name": "windows-Release",
+            "configurePreset": "windows-Release"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "linux-Release",
+            "configurePreset": "linux-Release",
+            "output": {
+                "outputOnFailure": true
+            },
+            "execution": {
+                "noTestsAction": "error",
+                "stopOnFailure": true
+            }
+        },
+        {
+            "name": "windows-Release",
+            "configurePreset": "windows-Release",
+            "output": {
+                "outputOnFailure": true
+            },
+            "execution": {
+                "noTestsAction": "error",
+                "stopOnFailure": true
+            }
+        },
+        {
+            "name": "linux-Debug",
+            "configurePreset": "linux-Debug",
+            "output": {
+                "outputOnFailure": true
+            },
+            "execution": {
+                "noTestsAction": "error",
+                "stopOnFailure": true
+            }
+        },
+        {
+            "name": "windows-Debug",
+            "configurePreset": "windows-Debug",
+            "output": {
+                "outputOnFailure": true
+            },
+            "execution": {
+                "noTestsAction": "error",
+                "stopOnFailure": true
+            }
+        }
+    ]
+}

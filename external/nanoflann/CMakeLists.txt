@@ -101,18 +101,18 @@ target_link_libraries(nanoflann INTERFACE Threads::Threads)
 add_library(nanoflann::nanoflann ALIAS nanoflann)
 
 # Examples
-option(NANOFLANN_BUILD_EXAMPLES "Build examples" ON)
-if(NANOFLANN_BUILD_EXAMPLES)
-	add_subdirectory(examples)
-endif()
+# option(NANOFLANN_BUILD_EXAMPLES "Build examples" ON)
+# if(NANOFLANN_BUILD_EXAMPLES)
+# 	add_subdirectory(examples)
+# endif()
 
 # Tests
-option(NANOFLANN_BUILD_TESTS "Build unit tests" ON)
+# option(NANOFLANN_BUILD_TESTS "Build unit tests" ON)
 option(NANOFLANN_USE_SYSTEM_GTEST "Use system GTest dependency" OFF)
-if(NANOFLANN_BUILD_TESTS)
-	enable_testing()
-	add_subdirectory(tests)
-endif()
+# if(NANOFLANN_BUILD_TESTS)
+# 	enable_testing()
+# 	add_subdirectory(tests)
+# endif()
 
 # --------------------------------------------------------------------
 # Install/uninstall targets
@@ -122,18 +122,18 @@ endif()
 set(nanoflann_pkgconfig_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
 # Generate the pkg-config file:
-configure_file(
-	"${nanoflann_SOURCE_DIR}/scripts/nanoflann.pc.in"
-	"${nanoflann_BINARY_DIR}/nanoflann.pc" @ONLY IMMEDIATE )
+# configure_file(
+# 	"${nanoflann_SOURCE_DIR}/scripts/nanoflann.pc.in"
+# 	"${nanoflann_BINARY_DIR}/nanoflann.pc" @ONLY IMMEDIATE )
 
 # Generate the cmake config and cmake config-version file:
 include(CMakePackageConfigHelpers)
 
-configure_package_config_file(
-    "${nanoflann_SOURCE_DIR}/scripts/nanoflannConfig.cmake.in"
-    "${nanoflann_BINARY_DIR}/nanoflannConfig.cmake"
-    INSTALL_DESTINATION ${INSTALL_CMAKE_DIR}
-    PATH_VARS INSTALL_INCLUDE_DIR)
+# configure_package_config_file(
+#     "${nanoflann_SOURCE_DIR}/scripts/nanoflannConfig.cmake.in"
+#     "${nanoflann_BINARY_DIR}/nanoflannConfig.cmake"
+#     INSTALL_DESTINATION ${INSTALL_CMAKE_DIR}
+#     PATH_VARS INSTALL_INCLUDE_DIR)
 
 # Setting CMAKE_SIZEOF_VOID_P to the empty string has the same
 # effect as the ARCH_INDEPENDENT option of
@@ -150,10 +150,10 @@ write_basic_package_version_file(
 set(CMAKE_SIZEOF_VOID_P "${backup_of_CMAKE_SIZEOF_VOID_P}")
 
 # Uninstall target, for "make uninstall"
-configure_file(
-  "${nanoflann_SOURCE_DIR}/scripts/cmake_uninstall.cmake.in"
-  "${nanoflann_BINARY_DIR}/cmake_uninstall.cmake"
-  @ONLY IMMEDIATE)
+# configure_file(
+#   "${nanoflann_SOURCE_DIR}/scripts/cmake_uninstall.cmake.in"
+#   "${nanoflann_BINARY_DIR}/cmake_uninstall.cmake"
+#   @ONLY IMMEDIATE)
 
 option(MASTER_PROJECT_HAS_TARGET_UNINSTALL "uninstall target to master project CMakeLists.txt" ON)
 

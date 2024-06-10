@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.20)
 project(opencoor_samples)
 
 # configuration
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 
 file(GLOB OPENCORR_CPP
      "../src/*.cpp"

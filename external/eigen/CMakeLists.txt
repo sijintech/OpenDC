@@ -37,23 +37,23 @@ set(EIGEN_MINOR_VERSION "${CMAKE_MATCH_1}")
 set(EIGEN_VERSION_NUMBER ${EIGEN_WORLD_VERSION}.${EIGEN_MAJOR_VERSION}.${EIGEN_MINOR_VERSION})
 
 # if we are not in a git clone
-if(IS_DIRECTORY ${CMAKE_SOURCE_DIR}/.git)
-  # if the git program is absent or this will leave the EIGEN_GIT_REVNUM string empty,
-  # but won't stop CMake.
-  execute_process(COMMAND git ls-remote --refs -q ${CMAKE_SOURCE_DIR} HEAD OUTPUT_VARIABLE EIGEN_GIT_OUTPUT)
-endif()
+# if(IS_DIRECTORY ${CMAKE_SOURCE_DIR}/.git)
+#   # if the git program is absent or this will leave the EIGEN_GIT_REVNUM string empty,
+#   # but won't stop CMake.
+#   execute_process(COMMAND git ls-remote --refs -q ${CMAKE_SOURCE_DIR} HEAD OUTPUT_VARIABLE EIGEN_GIT_OUTPUT)
+# endif()
 
 # extract the git rev number from the git output...
-if(EIGEN_GIT_OUTPUT)
-string(REGEX MATCH "^([0-9;a-f]+).*" EIGEN_GIT_CHANGESET_MATCH "${EIGEN_GIT_OUTPUT}")
-set(EIGEN_GIT_REVNUM "${CMAKE_MATCH_1}")
-endif()
-#...and show it next to the version number
-if(EIGEN_GIT_REVNUM)
-  set(EIGEN_VERSION "${EIGEN_VERSION_NUMBER} (git rev ${EIGEN_GIT_REVNUM})")
-else()
-  set(EIGEN_VERSION "${EIGEN_VERSION_NUMBER}")
-endif()
+# if(EIGEN_GIT_OUTPUT)
+# string(REGEX MATCH "^([0-9;a-f]+).*" EIGEN_GIT_CHANGESET_MATCH "${EIGEN_GIT_OUTPUT}")
+# set(EIGEN_GIT_REVNUM "${CMAKE_MATCH_1}")
+# endif()
+# #...and show it next to the version number
+# if(EIGEN_GIT_REVNUM)
+#   set(EIGEN_VERSION "${EIGEN_VERSION_NUMBER} (git rev ${EIGEN_GIT_REVNUM})")
+# else()
+#   set(EIGEN_VERSION "${EIGEN_VERSION_NUMBER}")
+# endif()
 
 include(CheckCXXCompilerFlag)
 include(GNUInstallDirs)
@@ -466,42 +466,42 @@ install(FILES
   DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel
   )
 
-if(EIGEN_BUILD_PKGCONFIG)
-    configure_file(eigen3.pc.in eigen3.pc @ONLY)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/eigen3.pc
-        DESTINATION ${PKGCONFIG_INSTALL_DIR}
-        )
-endif()
+# if(EIGEN_BUILD_PKGCONFIG)
+#     configure_file(eigen3.pc.in eigen3.pc @ONLY)
+#     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/eigen3.pc
+#         DESTINATION ${PKGCONFIG_INSTALL_DIR}
+#         )
+# endif()
 
 install(DIRECTORY Eigen DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel)
 
 
-option(EIGEN_BUILD_DOC "Enable creation of Eigen documentation" ON)
-if(EIGEN_BUILD_DOC)
-  add_subdirectory(doc EXCLUDE_FROM_ALL)
-endif()
+# option(EIGEN_BUILD_DOC "Enable creation of Eigen documentation" ON)
+# if(EIGEN_BUILD_DOC)
+#   add_subdirectory(doc EXCLUDE_FROM_ALL)
+# endif()
 
 
 option(BUILD_TESTING "Enable creation of Eigen tests." ON)
-if(BUILD_TESTING)
-  include(EigenConfigureTesting)
+# if(BUILD_TESTING)
+#   include(EigenConfigureTesting)
 
-  if(EIGEN_LEAVE_TEST_IN_ALL_TARGET)
-    add_subdirectory(test) # can't do EXCLUDE_FROM_ALL here, breaks CTest
-  else()
-    add_subdirectory(test EXCLUDE_FROM_ALL)
-  endif()
+  # if(EIGEN_LEAVE_TEST_IN_ALL_TARGET)
+  #   add_subdirectory(test) # can't do EXCLUDE_FROM_ALL here, breaks CTest
+  # else()
+  #   add_subdirectory(test EXCLUDE_FROM_ALL)
+  # endif()
 
-  add_subdirectory(failtest)
-endif()
+#   add_subdirectory(failtest)
+# endif()
 
-if(EIGEN_LEAVE_TEST_IN_ALL_TARGET)
-  add_subdirectory(blas)
-  add_subdirectory(lapack)
-else()
-  add_subdirectory(blas EXCLUDE_FROM_ALL)
-  add_subdirectory(lapack EXCLUDE_FROM_ALL)
-endif()
+# if(EIGEN_LEAVE_TEST_IN_ALL_TARGET)
+#   add_subdirectory(blas)
+#   add_subdirectory(lapack)
+# else()
+#   add_subdirectory(blas EXCLUDE_FROM_ALL)
+#   add_subdirectory(lapack EXCLUDE_FROM_ALL)
+# endif()
 
 # add SYCL
 option(EIGEN_TEST_SYCL "Add Sycl support." OFF)
@@ -535,25 +535,25 @@ endif()
 
 add_subdirectory(unsupported)
 
-add_subdirectory(demos EXCLUDE_FROM_ALL)
+# add_subdirectory(demos EXCLUDE_FROM_ALL)
 
 # must be after test and unsupported, for configuring buildtests.in
-add_subdirectory(scripts EXCLUDE_FROM_ALL)
+# add_subdirectory(scripts EXCLUDE_FROM_ALL)
 
 # TODO: consider also replacing EIGEN_BUILD_BTL by a custom target "make btl"?
-if(EIGEN_BUILD_BTL)
-  add_subdirectory(bench/btl EXCLUDE_FROM_ALL)
-endif()
+# if(EIGEN_BUILD_BTL)
+#   add_subdirectory(bench/btl EXCLUDE_FROM_ALL)
+# endif()
 
-if(NOT WIN32)
-  add_subdirectory(bench/spbench EXCLUDE_FROM_ALL)
-endif()
+# if(NOT WIN32)
+#   add_subdirectory(bench/spbench EXCLUDE_FROM_ALL)
+# endif()
 
-configure_file(scripts/cdashtesting.cmake.in cdashtesting.cmake @ONLY)
+# configure_file(scripts/cdashtesting.cmake.in cdashtesting.cmake @ONLY)
 
-if(BUILD_TESTING)
-  ei_testing_print_summary()
-endif()
+# if(BUILD_TESTING)
+#   ei_testing_print_summary()
+# endif()
 
 message(STATUS "")
 message(STATUS "Configured Eigen ${EIGEN_VERSION_NUMBER}")
